@@ -134,6 +134,25 @@ function M.select()
   end)
 end
 
+function M.delete()
+  local sessions = M.list()
+  if #sessions == 0 then
+    vim.notify("无可删除的会话", vim.log.levels.INFO)
+    return
+  end
+  vim.ui.select(sessions, {
+    prompt = "选择要删除的会话",
+    format_item = function(path)
+      return vim.fn.fnamemodify(path, ":p:~")
+    end,
+  }, function(item)
+    if item then
+      os.remove(item)
+      vim.notify("已删除: " .. item)
+    end
+  end)
+end
+
 --- get current branch name
 ---@return string?
 function M.branch()
