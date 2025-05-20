@@ -141,7 +141,7 @@ function M.delete()
     return
   end
   vim.ui.select(sessions, {
-    prompt = "选择要删除的会话",
+    prompt = "Delete a session: ",
     format_item = function(path)
       return vim.fn.fnamemodify(path, ":p:~")
     end,
